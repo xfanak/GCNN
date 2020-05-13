@@ -2,11 +2,11 @@
 Graph convolutional neural network implemention using PyTorch
 
 # Requirements
-Python 3.8.0
-PyTorch 1.5.0
-scipy 1.4.1
-numpy 1.18.1
-scikit-learn 0.22.2
+Python==3.8.0
+PyTorch==1.5.0
+scipy==1.4.1
+numpy==1.18.1
+scikit-learn==0.22.2
 
 # Testing the GCNN
 The GCNN was trained to predict the potential energies of particles for a binary Lennard-Jones mixture.
