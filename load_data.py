@@ -55,17 +55,6 @@ def get_neighbor(pos,l,ncut=21):
         dis.append(tmp[nn])
     return np.array(neigh_id),np.array(dis)
 
-def neighbor_pairs(gmap):
-    n,l = gmap.shape
-    l = l - 1
-    index0 = []
-    index1 = []
-    for i in range(n):
-        index0.append(np.repeat(gmap[i,0],l))
-        index1.append(gmap[i,1:])
-        #record.append(np.array(list(zip(np.repeat(gmap[i,0],l),gmap[i,1:]))))
-    return np.array(index0),np.array(index1)
-
 def expand_dis(dis,l=4.5,nbin=50,sigma=0.5):
     m,n = dis.shape
     r0 = np.linspace(0,l,nbin,False)
@@ -84,15 +73,15 @@ for i in range(5):
     expdis.append(dis)
 gmap = np.array(gmap)
 expdis = np.array(expdis)
-#i0,i1 = neighbor_pairs(graph_map)
-#np.save('graph_map.npy',gmap)
-#np.save('exp_dis',expdis)
 
-#xall = np.zeros((5,4000,3)) # 3 features for each type: type, radius, mass
-#xall[:,:3200,0] = 0
-#xall[:,3200:,0] = 1
-#xall[:,:3200,1] = 1
-#xall[:,3200:,1] = 0.88
-#xall[:,:3200,2] = 1
-#xall[:,3200:,2] = 1
-#np.save('atom_feature.npy',xall)
+np.save('graph_map.npy',gmap)
+np.save('exp_dis.npy',expdis)
+
+xall = np.zeros((5,4000,3)) # 3 features for each type: type, radius, mass
+xall[:,:3200,0] = 0
+xall[:,3200:,0] = 1
+xall[:,:3200,1] = 1
+xall[:,3200:,1] = 0.88
+xall[:,:3200,2] = 1
+xall[:,3200:,2] = 1
+np.save('atom_feature.npy',xall)
