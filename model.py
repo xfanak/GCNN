@@ -17,7 +17,7 @@ class conv(torch.nn.Module):
         self.h2 = h2
         self.bond_embed = torch.nn.Linear(n_bond_feature+2*n_atom_feature,h1) # cat the bond features and corresponding atom features into 1 vector
         self.atom_embed = torch.nn.Linear(h1 + n_atom_feature,h2) # h1+n_atom_feature = number of atom features after embeding
-        self.bond_update = torch.nn.Linear(h2+2*h2,h1)
+        self.bond_update = torch.nn.Linear(h1+2*h2,h1)
         self.atom_update = torch.nn.Linear(h1+h2,h2)
         self.fc = torch.nn.Linear(h2,1)
 
