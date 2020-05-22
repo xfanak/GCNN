@@ -7,6 +7,8 @@ PyTorch==1.5.0
 scipy==1.4.1
 numpy==1.18.1
 scikit-learn==0.22.2
+Pymatgen==2020.4.29
+Matplotlib==3.2.1
 
 # Testing the GCNN
 Note that the parameters used in the examples were randomly chosen, and should be tested thoroughly when doing real projects. 
