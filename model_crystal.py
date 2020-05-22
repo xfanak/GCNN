@@ -1,3 +1,4 @@
+#Handles crystal property predictions. Per crystal quantities like formation energy, band gap, bulk module etc.
 import numpy as np
 import torch
 import torch.nn.functional as F
