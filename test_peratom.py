@@ -3,7 +3,7 @@ import torch
 import torch.nn.functional as F
 from sklearn.preprocessing import StandardScaler
 from pylab import plot,show,xlabel,ylabel,legend
-from model import conv
+from model_peratom import conv
 
 # load the training data and scale the features
 gmap = torch.from_numpy(np.load('graph_map.npy'))
