@@ -1,4 +1,4 @@
-from model import *
+from model_crystal import *
 
 data = torch.load('data.save')
 label = torch.load('label.save')
