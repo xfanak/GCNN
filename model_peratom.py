@@ -1,3 +1,5 @@
+# This model handles per-atom quantities only, like propensity, magnetic moment, potential energy etc.
+
 import torch
 import torch.nn.functional as F
 
