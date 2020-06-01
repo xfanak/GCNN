@@ -69,19 +69,8 @@ class Crystal_embeding(object):
     def __call__(self,sample,preprocessed=False):
         #preprocessed: bool, whether to read in crystal features from crystal_id.save files. 
         crystal_id,cry_prop = sample['crystal_id'],sample['property']
-#        if preprocessed:
-#            crystal_tsfmed = self.read_preprocessed(crystal_id)
-#        else:
         crystal_tsfmed  = self.crystal_embed(crystal_id,preprocessed)
         return {'crystal_id':crystal_id,'crystal_fea':crystal_tsfmed,'property':cry_prop}
-
-    def read_preprocessed(self,c_id):
-        crystal = Structure.from_file(os.path.join(self.root_dir,c_id+self.fmat))
-        elements = crystal.species
-        n = crystal.num_sites # number of atoms in that crystal
-        atom_fea = self.get_atom_fea([i.name for i in elements])
-        atom_fea,nbr_fea,nbr_idx = torch.load(c_id+'.save')
-        return atom_fea,nbr_fea,nbr_idx
     
     def get_atom_fea(self,ele_symbols):
         a_fea = []
@@ -90,16 +79,14 @@ class Crystal_embeding(object):
         return np.array(a_fea)
 
     def crystal_embed(self,c_id,preprocessed):
-        crystal = Structure.from_file(os.path.join(self.root_dir,c_id+self.fmat))
-        elements = crystal.species
-        n = crystal.num_sites # number of atoms in that crystal
-        atom_fea = self.get_atom_fea([i.name for i in elements])
-        atom_fea = torch.tensor(atom_fea).float()
         # the neighbor info won't change, thus we can save the preprocessed neighboring
         # features and load them easily, this will save a lot of computational time. 
         if preprocessed:
-            nbr_fea,nbr_idx = torch.load(os.path.join(self.root_dir,c_id+'.save'))
+            elements,nbr_fea,nbr_idx = torch.load(os.path.join(self.root_dir,c_id+'.save'))
+            atom_fea = torch.tensor(self.get_atom_fea([i.name for i in elements])).float()
         else:
+            crystal = Structure.from_file(os.path.join(self.root_dir,c_id+self.fmat))
+            atom_fea = torch.tensor(self.get_atom_fea([i.name for i in elements])).float()
             all_nbrs = crystal.get_all_neighbors(self.rcut, include_index=True)
             all_nbrs = [sorted(nbrs, key=lambda x: x[1]) for nbrs in all_nbrs]
             nbr_idx = []
