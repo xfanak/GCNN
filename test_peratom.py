@@ -32,7 +32,8 @@ for i in range(4000):
     optimizer.zero_grad()
     loss.backward()
     optimizer.step()
-
+model.eval()
+yp = model(gmap[-1],test_atom,bonds[-1])
 plot(yp.detach().numpy(),test_y.numpy(),label='Predicted')
 plot(test_y.numpy(),test_y.numpy(),'o',label='True')
 xlabel('Prediction')
