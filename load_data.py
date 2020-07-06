@@ -75,25 +75,5 @@ for i in range(41):
     nbr_idx = torch.tensor(graph_map)
     nbr_fea = torch.tensor(dis).float()
     torch.save((atom_fea,nbr_fea,nbr_idx),str(i)+'.save')
-#    gmap.append(graph_map[:ntot]+base_id)
-#    expdis.append(dis)
-    #base_id = base_id + ntot
-#gmap = torch.tensor(gmap)
-#cond = gmap<n1
-#gmap[cond] = 0
-#gmap[~cond] = 1
-#expdis = torch.tensor(expdis).float()
-#m,n = expdis.shape[2:]
-#torch.save(gmap,'nbr_id.save')
-#torch.save(expdis,'nbr_fea.save')
-#np.save('exp_dis',expdis)
 
-#xall = np.zeros((5,4000,3)) # 3 features for each type: type, radius, mass
-#xall[:,:3200,0] = 0
-#xall[:,3200:,0] = 1
-#xall[:,:3200,1] = 1
-#xall[:,3200:,1] = 0.88
-#xall[:,:3200,2] = 1
-#xall[:,3200:,2] = 1
-#np.save('atom_feature.npy',xall)
 
